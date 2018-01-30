@@ -65,7 +65,7 @@ void i2c_read_byte(uint8_t * byte, bool send_ask)
 {
 	I2C_SET_PIN_LOW(SCL);
 	I2C_SET_PIN_HZ(SDA);
-	uint8_t mask = 1;
+	uint8_t mask = 1<<7;
 	while(mask)
 	{
 		I2C_SET_PIN_LOW(SCL);
@@ -74,7 +74,7 @@ void i2c_read_byte(uint8_t * byte, bool send_ask)
 		if(I2C_PIN_STATE(SDA))
 			*byte = (*byte) | mask;
 
-		mask = mask << 1;
+		mask = mask >> 1;
 	}
 
 	I2C_SET_PIN_LOW(SCL);

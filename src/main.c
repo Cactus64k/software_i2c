@@ -36,7 +36,7 @@ int main()
 			i2c_read_16bit(&temp, false);
 			i2c_stop();
 
-			printf("byte = 0x%X, %f\n", temp, (temp>>7)*0.5);
+			printf("byte = 0x%X, %f\n", temp, (temp>>5)*0.125);
 		}
 		_delay_ms(1000);
 	}
