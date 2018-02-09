@@ -6,14 +6,13 @@
 	#include <stdio.h>
 	#include <stdint.h>
 	#include <avr/interrupt.h>
-	#include <util/delay.h>
 	#include <stdbool.h>
 
 	#define I2C_PORT				PORTB
 	#define I2C_PIN					PINB
 	#define I2C_DDR					DDRB
-	#define SDA						PB1
-	#define SCL						PB2
+	#define SDA						PB2
+	#define SCL						PB1
 
 	#define ASK						0
 	#define NASK					1
@@ -29,10 +28,22 @@
 
 	int i2c_init();
 	int i2c_send_byte(uint8_t byte);
-	void i2c_read_byte(uint8_t * byte, bool send_ask);
-	void i2c_read_16bit(uint16_t * word, bool send_ask);
+	void i2c_read_byte(uint8_t* byte, bool send_ask);
+	void i2c_read_16bit(uint16_t* word, bool send_ask);
 	void i2c_start();
 	void i2c_stop();
+
+	typedef enum I2C_STATUS
+	{
+		I2C_TRANSFER_OK = 0,
+		I2C_NO_DEVICE,
+		I2C_REG_WRITE_FAIL,
+		I2C_RESTART_FAIL,
+		I2C_WRITE_DATA_FAIL
+	} I2C_STATUS;
+
+	I2C_STATUS i2c_write_byte_to_reg(uint8_t dev_addr, uint8_t reg_addr, uint8_t data);
+	I2C_STATUS i2c_read_16bit_from_reg(uint8_t dev_addr, uint8_t reg_addr, uint16_t* data);
 
 
 #endif /* I2C_MASTER_I2C_MASTER_H_ */

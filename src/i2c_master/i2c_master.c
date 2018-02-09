@@ -61,7 +61,7 @@ int i2c_send_byte(uint8_t byte)
 		return ASK;
 }
 
-void i2c_read_byte(uint8_t * byte, bool send_ask)
+void i2c_read_byte(uint8_t* byte, bool send_ask)
 {
 	I2C_SET_PIN_LOW(SCL);
 	I2C_SET_PIN_HZ(SDA);
@@ -78,14 +78,14 @@ void i2c_read_byte(uint8_t * byte, bool send_ask)
 	}
 
 	I2C_SET_PIN_LOW(SCL);
-	if(send_ask == true)
+	if(send_ask)
 	{
 		I2C_SET_PIN_LOW(SDA);
 	}
 	I2C_SET_PIN_HIGH(SCL);
 }
 
-void i2c_read_16bit(uint16_t * word, bool send_ask)
+void i2c_read_16bit(uint16_t* word, bool send_ask)
 {
 	uint8_t l_byte = 0;
 	uint8_t h_byte = 0;
