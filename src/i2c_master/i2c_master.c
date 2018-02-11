@@ -98,16 +98,9 @@ void i2c_read_16bit(uint16_t* word, bool send_ask)
 
 void i2c_stop()
 {
-	if(!I2C_PIN_STATE(SDA) && I2C_PIN_STATE(SCL))
-	{
-		I2C_SET_PIN_HIGH(SDA);
-	}
-	else
-	{
 		I2C_SET_PIN_LOW(SCL);
 		I2C_SET_PIN_LOW(SDA);
 
 		I2C_SET_PIN_HIGH(SCL);
 		I2C_SET_PIN_HIGH(SDA);
-	}
 }
